@@ -1,7 +1,7 @@
-import 'package:bloc_app/counter/counter_bloc.dart';
+import 'package:bloc_app/increment/counter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
+import './screen/counter_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -20,65 +20,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const MyHomePage(title: 'Flutter BloC Home Page'),
-      ),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  final String title;
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Count:',
-            ),
-            BlocBuilder<CounterBloc, CounterState>(
-              builder: (context, state) {
-                return Text(
-                  '${state.count}',
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          FloatingActionButton(
-            tooltip: 'Decrement',
-            child: const Icon(Icons.remove),
-            onPressed: () {
-              context.read<CounterBloc>().add(Decrement());
-
-              //OR
-
-              //BlocProvider.of<CounterBloc>(context).add(Decrement());
-          }),
-          FloatingActionButton(
-            onPressed: () {
-              context.read<CounterBloc>().add(Increment());
-
-              //OR
-
-              //BlocProvider.of<CounterBloc>(context).add(Increment());
-            },
-            tooltip: 'Increment',
-            child: const Icon(Icons.add),
-          ),
-        ],
+        home: const CounterScreen(title: 'Counter Page'),
       ),
     );
   }
